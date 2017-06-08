@@ -1,0 +1,55 @@
+{
+    "name": "ch.cpnv.karmajob",
+    "version": "1.0.0",
+    "displayName": "KarmaJob",
+    "scripts": {
+        "dev": "webpack -d --watch",
+        "build": "webpack -p",
+        "start": "cordova run -- --live-reload"
+    },
+    "cordova": {
+        "platforms": [
+            "android",
+            "browser"
+        ],
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-browsersync": {},
+            "cordova-plugin-geolocation": {}
+        }
+    },
+    "dependencies": {
+        "babel-loader": "^7.0.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-es2017": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "cordova-android": "~6.2.3",
+        "cordova-browser": "~4.1.0",
+        "cordova-plugin-browsersync": "^0.1.6",
+        "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-whitelist": "1",
+        "history": "^4.6.1",
+        "prop-types": "^15.5.10",
+        "react": "^15.5.4",
+        "react-dom": "^15.5.4",
+        "react-redux": "^5.0.5",
+        "react-router": "^4.1.1",
+        "react-router-redux": "^4.0.8",
+        "react-ui": "^0.6.2",
+        "redux": "^3.6.0",
+        "redux-auth-wrapper": "^1.1.0",
+        "redux-promise": "^0.5.3",
+        "redux-thunk": "^2.2.0",
+        "redux-ui": "^0.1.1",
+        "webpack": "^2.5.1"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-decorators": "^6.24.1",
+        "babel-plugin-transform-decorators-legacy": "^1.3.4",
+        "redux-devtools": "^3.4.0",
+        "redux-devtools-dock-monitor": "^1.1.2",
+        "redux-devtools-log-monitor": "^1.3.0",
+        "webpack-cordova-plugin": "^0.1.6"
+    }
+}
