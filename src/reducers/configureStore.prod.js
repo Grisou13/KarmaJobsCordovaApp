@@ -5,16 +5,22 @@ import {routerReducer, routerMiddleware } from 'react-router-redux'
 import promiseMiddleware from 'redux-promise';
 import { browserHistory } from 'react-router'
 
+import userReducer from './user'
+import jobReducer from './jobs'
+
 const reducers = combineReducers({
     routing: routerReducer,
     ui: rUiReducer,
+    user: userReducer,
+    jobs: jobReducer,
+
 })
 const enhancer = compose(
     // Middleware you want to use in development:
     applyMiddleware(thunk, routerMiddleware(browserHistory) ),
 );
 const initialState = {}
-export default configureStore => (initialState) {
+export default (initialState) => {
   // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
   // See https://github.com/reactjs/redux/releases/tag/v3.1.0
   const store = createStore(reducers, initialState, enhancer);

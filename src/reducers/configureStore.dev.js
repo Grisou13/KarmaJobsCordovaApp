@@ -5,10 +5,14 @@ import DevTools from './../containers/DevTools';
 import {routerReducer, routerMiddleware } from 'react-router-redux'
 import promiseMiddleware from 'redux-promise';
 import { browserHistory } from 'react-router'
+import userReducer from './user'
+import jobReducer from './jobs'
 
 const reducers = combineReducers({
     routing: routerReducer,
     ui: rUiReducer,
+    user: userReducer,
+    jobs: jobReducer,
 })
 const enhancer = compose(
     // Middleware you want to use in development:

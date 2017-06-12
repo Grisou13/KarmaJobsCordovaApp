@@ -6,8 +6,21 @@ import {connect} from 'react-redux'
 import { logout } from '../actions/user'
 import ui from 'redux-ui';
 import Home from './Home'
+import {withRouter} from "react-router";
 
+const mapStateToProps = (state) => {
+    return {
+        // displayModeEnabled : state.displayMode
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // toggle: () => dispatch(toggleDisplayMode())
+    }
+}
 
+@withRouter
+@connect(mapStateToProps, mapDispatchToProps)
 @ui({
     key:"root-app",
     state:{
@@ -22,7 +35,7 @@ class App extends React.Component{
           {/* wait for device ready here and put a splash screen*/}
             Links:
             {' '}
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             {' '}
             <Link to="/jobs">{'Jobs (Login Required)'}</Link>
             {' '}
@@ -32,7 +45,7 @@ class App extends React.Component{
             {' '}
             <button onClick={() => logout()}>Logout</button>
           </header>
-          <div style={{ marginTop: '1.5em' }}>{this.props.children || <Home />}</div>
+          <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
         </div>
       )
     }
@@ -40,14 +53,5 @@ class App extends React.Component{
 App.propTypes = {
 
 }
-const mapStateToProps = (state) => {
-    return {
-        // displayModeEnabled : state.displayMode
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // toggle: () => dispatch(toggleDisplayMode())
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+export default App

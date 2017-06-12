@@ -14,7 +14,9 @@ class LoginContainer extends Component {
   };
 
   render() {
+      console.log("ASKHBDASD");
     return (
+
       <div>
         <h2>Enter your name</h2>
         <input type="text" ref="name" />
