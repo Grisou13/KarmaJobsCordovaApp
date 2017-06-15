@@ -7,7 +7,7 @@ import promiseMiddleware from 'redux-promise';
 import { browserHistory } from 'react-router'
 import userReducer from './user'
 import jobReducer from './jobs'
-
+import jobMiddleware from '../middlewares/job'
 const reducers = combineReducers({
     routing: routerReducer,
     ui: rUiReducer,
@@ -16,7 +16,7 @@ const reducers = combineReducers({
 })
 const enhancer = compose(
     // Middleware you want to use in development:
-    applyMiddleware(thunk, routerMiddleware(browserHistory) ),
+    applyMiddleware(thunk, routerMiddleware(browserHistory), jobMiddleware ),
     // Required! Enable Redux DevTools with the monitors you chose
     DevTools.instrument(),
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions

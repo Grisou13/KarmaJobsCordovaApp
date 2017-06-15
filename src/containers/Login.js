@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import { routerActions } from 'react-router-redux'
 import { login } from '../actions/user'
 
 class LoginContainer extends Component {
@@ -13,8 +13,23 @@ class LoginContainer extends Component {
     })
   };
 
+    componentWillMount() {
+        const { isAuthenticated, replace, redirect } = this.props
+        if (isAuthenticated) {
+            replace(redirect)
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { isAuthenticated, replace, redirect } = nextProps
+        const { isAuthenticated: wasAuthenticated } = this.props
+
+        if (!wasAuthenticated && isAuthenticated) {
+            replace(redirect)
+        }
+    }
   render() {
-      console.log("ASKHBDASD");
+    console.log("RENDER LOGIN");
     return (
 
       <div>
@@ -24,25 +39,32 @@ class LoginContainer extends Component {
         <input type="text" ref="pwd" />
 
         <br/>
-        <button onClick={this.onClick}>Login</button>
+        <button onClick={(e) => this.onClick(e)}>Login</button>
       </div>
     )
   }
-
 }
+
 LoginContainer.propTypes = {
-  login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired
 }
-const mapStateToProps = (state) => {
-  return {
 
-  }
+function mapStateToProps(state, ownProps) {
+    const isAuthenticated = state.user.name || false
+    const redirect = ownProps.location.query ? ownProps.location.query.replace || '/' : '/'
+    return {
+        isAuthenticated,
+        redirect
+    }
 }
 const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (credentials) => {
-      dispatch(login(credentials))
+    return {
+        login: (credentials) => {
+            dispatch(login(credentials))
+        },
+        replace: routerActions.replace
     }
-  }
 }
-export default connect(null, mapDispatchToProps)(LoginContainer)
+// const mapDispatchToProps = (dispatch) => ({ login, replace: routerActions.replace })
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

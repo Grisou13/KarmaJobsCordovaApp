@@ -3,26 +3,24 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux'
 
 import ui from 'redux-ui';
+import Job from "../compoenents/Job";
 
-@ui({
-    key:"job-list",
-    state:{
-
-    }
-})
 class JobList extends React.Component{
+
     render(){
+        console.log("ASIHDASDASD")
       return (
           <div className="app-container">
-              <p>HELLO FROMM REACT</p>
+              {this.props.jobs.map( j => <Job key={j.id} job={j} /> )}
           </div>
       )
     }
 }
 JobList.propTypes = {
-    ui: PropTypes.object.isRequired,
-    updateUI: PropTypes.func.isRequired,
-    resetUI: PropTypes.func.isRequired,
+    ui: PropTypes.object,
+    updateUI: PropTypes.func,
+    resetUI: PropTypes.func,
+    jobs: PropTypes.array
 }
 const mapStateToProps = (state) => {
     return {

@@ -5,23 +5,27 @@ export default class Config {
     this.prefix = prefix ? prefix+"-" : null
   }
   get = (key, d = null) => Config.get(this.prefix+key,d)
-  set = (key, value) => Config.set(tthis.prefix+key,value)
+  set = (key, value) => Config.set(this.prefix+key,value)
   remove = (key) => Config.remove(this.prefix+key)
 
-  static get( key, d = null ){
+  static get( key, d = null ) {
+
     let item = window.localStorage.getItem(key);
-    if(typeof item == "undefined")
-      if(typeof d == "function")
-        return d()
+    if ((typeof item === "undefined"|| item === null ) && d !== null)
+      if (typeof d === "function")
+        return Config.set(key, d())
       else
-        return d
+        return Config.set(key, d)
     else
       return item
   }
   static set( key ,value ){
-    return window.localStorage.setItem(key,value);
+    window.localStorage.setItem(key,value)
+    return window.localStorage.getItem(key);
   }
   static remove(key){
-    return window.localStorage.removeItem(key);
+    let i = window.localStorage.getItem(key)
+    window.localStorage.removeItem(key);
+    return i
   }
 }

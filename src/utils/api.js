@@ -17,24 +17,37 @@ class Api{
         }
 
         // to test whether we have singleton or not
-        console.log(getApiUrlFromConfig())
-        this.transport = transporter(getApiUrlFromConfig(), conf.get("timeout",100000), conf.get("access_token",null))
-        console.log(this.transport.baseURL)
+        this.transport = Api.createTransport()
+        this.id = Math.random()
         return instance;
     }
     static getInstance(){
         return new Api;
     }
+    static createTransport(){
+        let url = conf.get("url",getApiUrlFromConfig)
+        return transporter(url, conf.get("timeout",100000), conf.get("access_token",null))
+    }
     login(data){
         console.log("logging in user")
-        var api = this.transport;
+        const api = Api.createTransport();
         console.log(api.baseURL)
+        console.log(this.transport.baseURL)
+        console.log(api)
         return api.post("/auth",data).then((res)=>res.data.token).then(token => {
             console.log("got token :"+token)
             conf.set("access_token", token)
-            instance.defaults.headers.common['Authorization'] = "Bearer "+token;
-            return api.get("/me").then(res => res.data.user)
+            return Api.createTransport().get("/me").then(res => res.data.user)
         })
+    }
+    getJobs () {
+        const api = Api.createTransport()
+        return api.get("/jobs");
+    }
+    getUser(){
+        return Api.createTransport().get("/me")
+            .then(res => res.data.user)
     }
 }
 export default Api;
+export const ApiConfig = conf
