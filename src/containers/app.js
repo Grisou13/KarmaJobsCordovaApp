@@ -10,7 +10,7 @@ import {
 import {connect} from 'react-redux'
 import { logout } from '../actions/user'
 import ui from 'redux-ui';
-
+// import Link from './../components/Link';
 const mapStateToProps = (state) => {
     return {
         user:state.user.data
@@ -27,15 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 @withRouter
-@ui({
-    key:"root-app",
-    state:{
-
-    }
-})
 class App extends React.Component{
     render(){
-
+        console.log(this.props.children)
         return (
             <div>
                 <header>

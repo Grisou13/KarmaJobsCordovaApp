@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux'
 
 import ui from 'redux-ui';
-import Job from "../compoenents/Job";
+import Job from "../components/Job";
 
 class JobList extends React.Component{
 
@@ -11,7 +11,8 @@ class JobList extends React.Component{
         console.log("ASIHDASDASD")
       return (
           <div className="app-container">
-              {this.props.jobs.map( j => <Job key={j.id} job={j} /> )}
+          <p>ASLHDGJAKSD</p>
+              {this.props.jobs.map( j => <Job key={j.id} {...j} /> )}
           </div>
       )
     }

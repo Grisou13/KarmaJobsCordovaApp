@@ -13,9 +13,9 @@ export default class Config {
     let item = window.localStorage.getItem(key);
     if ((typeof item === "undefined"|| item === null ) && d !== null)
       if (typeof d === "function")
-        return Config.set(key, d())
+        return d()
       else
-        return Config.set(key, d)
+        return d
     else
       return item
   }

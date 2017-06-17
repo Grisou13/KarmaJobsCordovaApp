@@ -5,6 +5,7 @@ export const login = data => dispatch => {
   dispatch(loggingIn())
     Api.getInstance().login(data)
         .then(user => dispatch(loggedIn(user)))
+        .then(() =>  dispatch(push('/jobs')))
         .catch(e => dispatch(loginFailed(e)))
 }
 export const loginFailed = (error) => {
