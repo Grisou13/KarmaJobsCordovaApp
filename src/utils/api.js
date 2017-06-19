@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from './config'
 const conf = new config("api")
+import Promise from 'bluebird'
 export const getApiUrlFromConfig = () => ("http://karmajobs.servehttp.com/api")
 var transporter = (url, timeout,token) => axios.create({
             baseURL: url,
@@ -47,6 +48,19 @@ class Api{
     getUser(){
         return Api.createTransport().get("/me")
             .then(res => res.data.user)
+    }
+    logout(){
+      return new Promise(function(resolve, reject) {
+        try {
+          if(conf.remove("access_token"))
+            resolve()
+          else
+            reject(e)
+        } catch (e) {
+          reject(e)
+        }
+
+      });
     }
 }
 export default Api;

@@ -24,6 +24,7 @@
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-es2017": "^6.24.1",
         "babel-preset-react": "^6.24.1",
+        "connected-react-router": "^4.2.1",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
         "cordova-plugin-browsersync": "^0.1.6",

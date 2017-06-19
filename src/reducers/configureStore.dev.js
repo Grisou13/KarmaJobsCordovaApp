@@ -7,6 +7,7 @@ import promiseMiddleware from 'redux-promise';
 import { browserHistory } from 'react-router'
 import userReducer from './user'
 import jobReducer from './jobs'
+import tracking from './tracking'
 import jobMiddleware from '../middlewares/job'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     ui: rUiReducer,
     user: userReducer,
     jobs: jobReducer,
+    tracking
 })
 const createEnhancers = (history) => compose(
       // Middleware you want to use in development:

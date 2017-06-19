@@ -7,13 +7,14 @@ import { browserHistory } from 'react-router'
 
 import userReducer from './user'
 import jobReducer from './jobs'
+import tracking from './tracking'
 
 const reducers = combineReducers({
     routing: routerReducer,
     ui: rUiReducer,
     user: userReducer,
     jobs: jobReducer,
-
+    tracking
 })
 const enhancer = compose(
     // Middleware you want to use in development:

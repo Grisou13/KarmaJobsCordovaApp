@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import {
-    BrowserRouter as Router,
     Route,
     Link,
     Redirect,
@@ -23,30 +22,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-
-
 @connect(mapStateToProps, mapDispatchToProps)
 @withRouter
 class App extends React.Component{
     render(){
-        console.log(this.props.children)
         return (
             <div>
-                <header>
-                    {/* wait for device ready here and put a splash screen*/}
-                    Links:
-                    {' '}
-                    <Link to="/">Home</Link>
-                    {' '}
-                    <Link to="/jobs">{'Jobs (Login Required)'}</Link>
-                    {' '}
-                    <Link to="/signup">{'Signup'}</Link>
-                    {' '}
-                    <Link to="/login">Login</Link>
-                    {' '}
-                    <button onClick={() => logout()}>Logout</button>
-                </header>
-
                 <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
                 {this.props.user?
                     (<Redirect to="/jobs" />)

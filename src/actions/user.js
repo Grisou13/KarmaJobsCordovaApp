@@ -1,6 +1,8 @@
 import * as constants from '../consts/user'
 import Api from '../utils/api'
 import config from '../utils/config'
+import { push } from 'connected-react-router'
+
 export const login = data => dispatch => {
   dispatch(loggingIn())
     Api.getInstance().login(data)
@@ -20,10 +22,16 @@ export const loggedIn = (user) => {
       payload: user
   }
 }
-export function logout() {
+export const _logout = () => {
   return {
     type: constants.USER_LOGGED_OUT
   }
+}
+export const logout = () => dispatch => {
+  Api.getInstance().logout()
+  .then(()=>dispatch(_logout()))
+  .then(()=>dispatch(push("/")))
+
 }
 export const loggingIn = () => ({
     type: constants.USER_LOGGING_IN

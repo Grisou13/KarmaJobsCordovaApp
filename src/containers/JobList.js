@@ -8,11 +8,10 @@ import Job from "../components/Job";
 class JobList extends React.Component{
 
     render(){
-        console.log("ASIHDASDASD")
       return (
           <div className="app-container">
           <p>ASLHDGJAKSD</p>
-              {this.props.jobs.map( j => <Job key={j.id} {...j} /> )}
+              {this.props.jobs.map( j => <Job key={j.id} {...j} currentPosition={this.props.position} /> )}
           </div>
       )
     }
@@ -25,7 +24,8 @@ JobList.propTypes = {
 }
 const mapStateToProps = (state) => {
     return {
-        jobs: state.jobs.items
+        jobs: state.jobs.items,
+        position: state.tracking
     }
 }
 const mapDispatchToProps = (dispatch) => {
