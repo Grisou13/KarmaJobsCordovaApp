@@ -8,6 +8,7 @@ import { browserHistory } from 'react-router'
 import userReducer from './user'
 import jobReducer from './jobs'
 import tracking from './tracking'
+import errors from './errors'
 import jobMiddleware from '../middlewares/job'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 

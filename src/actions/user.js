@@ -13,7 +13,7 @@ export const login = data => dispatch => {
 export const loginFailed = (error) => {
   return{
     type: constants.USER_FAILED_LOGIN,
-    payload: error
+    error
   }
 }
 export const loggedIn = (user) => {

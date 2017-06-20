@@ -2,13 +2,15 @@
 //
 //
 //
+import "babel-polyfill";
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory, Switch } from 'react-router'
 import { HashRouter, BrowserRouter, Link, Redirect } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter, push } from 'connected-react-router'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { createBrowserHistory, createHashHistory } from 'history';
 
@@ -54,6 +56,7 @@ if(token){
   console.log("LOGGIN IN USER WITH TOKEN:", token)
   store.dispatch(dispatch => {
       dispatch(getUserData())
+      dispatch(push("/jobs"))
   })
 }
 
@@ -116,16 +119,15 @@ const render = () => {
                 {' '}
                 <Link to="/">Home</Link>
                 {' '}
-                <Link to="/jobs">{'Jobs (Login Required)'}</Link>
+                <Link to="/jobs">Jobs</Link>
                 {' '}
                 <Link to="/login">Login</Link>
                 {' '}
+                <Link to="/settings">Settings</Link>
+                {' '}
                 <button onClick={() => store.dispatch(logout())}>Logout</button>
             </header>
-              {store.getState().forEach( reduc => {
-                  if(typeof reduc.error != "undefined" && reduc.error != null)
-                      return (<Error error={reduc.error} />)
-              })}
+              {store.getState().error ? (<Error error={store.getState().error} />):null}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={(Signup)}/>
@@ -141,7 +143,8 @@ const render = () => {
     document.getElementById('mount')
   )
 }
+document.addEventListener("deviceready", render, false);
 
-render()
+
 
 if (module.hot) module.hot.accept('./index', () => render());

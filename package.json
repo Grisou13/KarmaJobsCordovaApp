@@ -46,9 +46,7 @@
         "redux-promise": "^0.5.3",
         "redux-thunk": "^2.2.0",
         "redux-ui": "^0.1.1",
-        "webpack": "^2.5.1",
-        "babel-polyfill":"^6.23.0",
-        "bluebird":"^3.5.0"
+        "webpack": "^2.5.1"
     },
     "devDependencies": {
         "babel-plugin-transform-decorators": "^6.24.1",

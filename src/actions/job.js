@@ -13,9 +13,9 @@ export const gotJobs = (list) => ({
 export const fetching = () => ({
     type: FETCHING_JOBS
 })
-export const error = (err) => ({
+export const error = (error) => ({
     type: FETCH_JOBS_ERROR,
-    payload: err
+    error
 })
 export const fetchJobs = () => dispatch => {
     dispatch(fetching())
