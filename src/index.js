@@ -8,9 +8,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory, Switch } from 'react-router'
 import { HashRouter, BrowserRouter, Link, Redirect } from 'react-router-dom'
-// import { routerReducer, syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 import { ConnectedRouter } from 'connected-react-router'
-
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { createBrowserHistory, createHashHistory } from 'history';
 
@@ -20,13 +18,14 @@ import Home from './containers/Home'
 import Login from './containers/Login'
 import Signup from './containers/Signup'
 import JobList from './containers/JobList'
-
+import SettingsEditor from './containers/SettingsEditor'
 import DevTools from './containers/DevTools'
 
 import {ApiConfig} from './utils/api'
 import {getUserData} from "./actions/user";
 import {updatePosition} from "./actions/tracking";
 import { logout } from './actions/user'
+import Error from "./components/Error";
 
 const isClient = () => (typeof window !== 'undefined' && window.document);
 /**
@@ -45,7 +44,7 @@ const history = createHashHistory()
 * ----------------
 */
 let initialState = {}
-var token = ApiConfig.get("access_token","")
+var token = ApiConfig.accessToken
 if(token) {
     initialState.user = {token}
 }
@@ -123,10 +122,15 @@ const render = () => {
                 {' '}
                 <button onClick={() => store.dispatch(logout())}>Logout</button>
             </header>
+              {store.getState().forEach( reduc => {
+                  if(typeof reduc.error != "undefined" && reduc.error != null)
+                      return (<Error error={reduc.error} />)
+              })}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={(Signup)}/>
               <Route path="/login" component={(Login)}/>
+              <Route path="/settings" component={(SettingsEditor)}/>
               <Route path="/jobs" component={UserIsAuthenticated(JobList)}/>
             </Switch>
           </div>

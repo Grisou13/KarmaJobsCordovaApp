@@ -11,6 +11,30 @@ var transporter = (url, timeout,token) => axios.create({
         });
 
 let instance = null
+export class ApiConfig{
+    constructor(){
+        this.config = new config("api")
+    }
+    static get timeout() {
+        return conf.get("timeout",100000)
+    }
+    static set timeout(val){
+        return conf.set("timeout",val)
+    }
+    static get accessToken(){
+        return conf.get("access_token",null)
+    }
+    static set accessToken(val){
+        return conf.set("access_token",val)
+    }
+    static get url(){
+        return conf.get("url",getApiUrlFromConfig)
+    }
+    static set url(val){
+        return conf.set("url",val)
+    }
+}
+console.log(ApiConfig.url)
 class Api{
     constructor() {
         if(!instance){
@@ -20,14 +44,14 @@ class Api{
         // to test whether we have singleton or not
         this.transport = Api.createTransport()
         this.id = Math.random()
+        this.config = new ApiConfig
         return instance;
     }
     static getInstance(){
         return new Api;
     }
     static createTransport(){
-        let url = conf.get("url",getApiUrlFromConfig)
-        return transporter(url, conf.get("timeout",100000), conf.get("access_token",null))
+        return transporter(ApiConfig.url, ApiConfig.timeout, ApiConfig.accessToken)
     }
     login(data){
         console.log("logging in user")
@@ -37,7 +61,7 @@ class Api{
         console.log(api)
         return api.post("/auth",data).then((res)=>res.data.token).then(token => {
             console.log("got token :"+token)
-            conf.set("access_token", token)
+            ApiConfig.accessToken = token
             return Api.createTransport().get("/me").then(res => res.data.user)
         })
     }
@@ -64,4 +88,3 @@ class Api{
     }
 }
 export default Api;
-export const ApiConfig = conf
