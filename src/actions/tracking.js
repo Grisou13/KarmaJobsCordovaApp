@@ -1,4 +1,4 @@
-import {UPDATE_POSITION, RESET_POSITION} from './../consts/tracking'
+import {UPDATE_POSITION, RESET_POSITION, TRACKING_ERROR} from './../consts/tracking'
 
 
 export const updatePosition = (pos) => {
@@ -12,5 +12,12 @@ export const resetPosition = () => {
   return {
     type: RESET_POSITION,
     payload: null
+  }
+}
+
+export const error = (error) => {
+  return {
+    type: TRACKING_ERROR,
+    error
   }
 }

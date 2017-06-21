@@ -21,13 +21,14 @@ import Login from './containers/Login'
 import Signup from './containers/Signup'
 import JobList from './containers/JobList'
 import SettingsEditor from './containers/SettingsEditor'
+import Error from "./containers/Error";
 import DevTools from './containers/DevTools'
 
 import {ApiConfig} from './utils/api'
 import {getUserData} from "./actions/user";
-import {updatePosition} from "./actions/tracking";
+import {updatePosition, error as trackingError} from "./actions/tracking";
 import { logout } from './actions/user'
-import Error from "./components/Error";
+
 
 const isClient = () => (typeof window !== 'undefined' && window.document);
 /**
@@ -70,13 +71,13 @@ function onSuccess(position) {
   }
 
 function onError(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
+  store.dispatch(trackingError(error))
 }
+const options = { timeout: 3000,enableHighAccuracy: true }
 //watch position
-var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 // but also populate initial position
-navigator.geolocation.getCurrentPosition(onSuccess, onError);
+navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 console.log(watchID)
 /**
  * ----------------------------
@@ -85,7 +86,7 @@ console.log(watchID)
  */
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.user.data,
-  redirectAction: history.replace, // the redux action to dispatch for redirect
+  redirectAction: push, // the redux action to dispatch for redirect
   wrapperDisplayName: 'UserIsAuthenticated'
 })
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -113,6 +114,7 @@ const render = () => {
         { /* Tell the Router to use our enhanced history */ }
         <ConnectedRouter history={history}>
           <div>
+            <Error />
             <header>
                 {/* wait for device ready here and put a splash screen*/}
                 Links:
@@ -127,7 +129,7 @@ const render = () => {
                 {' '}
                 <button onClick={() => store.dispatch(logout())}>Logout</button>
             </header>
-              {store.getState().error ? (<Error error={store.getState().error} />):null}
+
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={(Signup)}/>

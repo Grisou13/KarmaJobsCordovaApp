@@ -33,9 +33,10 @@ export const logout = () => dispatch => {
   .then(()=>dispatch(push("/")))
 
 }
-export const loggingIn = () => ({
-    type: constants.USER_LOGGING_IN
-})
+export const loggingIn = () => dispatch => {
+    dispatch({type: constants.USER_LOGGING_IN})
+    dispatch(push('/jobs'))
+}
 export const signup = profile => dispatch => {
   setTimeout(() => {
     dispatch({

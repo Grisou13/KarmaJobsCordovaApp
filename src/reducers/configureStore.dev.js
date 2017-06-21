@@ -16,7 +16,8 @@ const reducers = combineReducers({
     ui: rUiReducer,
     user: userReducer,
     jobs: jobReducer,
-    tracking
+    tracking,
+    errors
 })
 const createEnhancers = (history) => compose(
       // Middleware you want to use in development:
@@ -33,11 +34,11 @@ export default (initialState, history) => {
   const store = createStore(connectRouter(history)(reducers), initialState, createEnhancers(history));
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
-  if (module.hot) {
-    module.hot.accept('./', () =>
-      store.replaceReducer(require('./')/*.default if you use Babel 6+ */)
-    );
-  }
 
+  // if (module.hot) {
+  //   module.hot.accept('./reducers', () =>
+  //     store.replaceReducer(connectRouter(history)(reducers))
+  //   );
+  // }
   return store;
 }
