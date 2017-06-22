@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var CordovaPlugin = require('webpack-cordova-plugin');
+const Dotenv = require('dotenv-webpack');
 
 
 var BUILD_DIR = path.resolve(__dirname, 'www');
@@ -22,6 +23,10 @@ var config = {
     ]
   },
   plugins: [
+      new Dotenv({
+          path: './.env', // Path to .env file (this is the default)
+          safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+      }),
     new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV ? process.env.NODE_ENV : "development")
@@ -32,10 +37,11 @@ var config = {
       src: 'index.html',     // Set entry-point of cordova in config.xml
       platform: 'android', // Set `webpack-dev-server` to correct `contentBase` to use Cordova plugins.
       version: true,         // Set config.xml' version. (true = use version from package.json)
-    })
+    }),
+
   ]
 };
-console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({

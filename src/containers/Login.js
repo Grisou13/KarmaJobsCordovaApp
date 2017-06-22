@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { routerActions } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import { login } from '../actions/user'
+import {Redirect} from "react-router";
 
+@connect((state)=>({loggedIn: state.user.token}))
 class LoginContainer extends Component {
 
   onClick = (e) => {
@@ -13,8 +15,13 @@ class LoginContainer extends Component {
       password: this.refs.pwd.value
     })
   };
-
+  componentWillMount(){
+      const {user, dispatch} = this.props
+      // if(user)
+      //   dispatch(push("/jobs"))
+  }
   render() {
+
     return (
 
       <div>
@@ -37,11 +44,12 @@ LoginContainer.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-
+    user: state.user.token
   }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        dispatch: dispatch,
         login: (credentials) => {
             dispatch(login(credentials))
         }

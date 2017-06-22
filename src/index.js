@@ -11,24 +11,16 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory, Switch } from 'react-router'
 import { HashRouter, BrowserRouter, Link, Redirect } from 'react-router-dom'
 import { ConnectedRouter, push } from 'connected-react-router'
-import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { createBrowserHistory, createHashHistory } from 'history';
 
 import configureStore from './reducers'
-import App from './containers/App'
-import Home from './containers/Home'
-import Login from './containers/Login'
-import Signup from './containers/Signup'
-import JobList from './containers/JobList'
-import SettingsEditor from './containers/SettingsEditor'
-import Error from "./containers/Error";
+import App from './App'
+
 import DevTools from './containers/DevTools'
 
 import {ApiConfig} from './utils/api'
 import {getUserData} from "./actions/user";
 import {updatePosition, error as trackingError} from "./actions/tracking";
-import { logout } from './actions/user'
-
 
 const isClient = () => (typeof window !== 'undefined' && window.document);
 /**
@@ -79,67 +71,32 @@ var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 // but also populate initial position
 navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 console.log(watchID)
-/**
- * ----------------------------
- * | Define redirect selectors
- * ----------------------------
- */
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user.data,
-  redirectAction: push, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated'
-})
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    store.user.token ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
+
 
 /**
  * -------------------
  * | Render
  * -------------------
  */
+function loadJS(src) {
+    var ref = window.document.getElementsByTagName("script")[0];
+    var script = window.document.createElement("script");
+    script.src = src;
+    script.async = true;
+    ref.parentNode.insertBefore(script, ref);
+}
+loadJS('https://maps.googleapis.com/maps/api/js?key='+process.env.GOOGLE_MAP_API_KEY)
+
+
 const render = () => {
   return ReactDOM.render(
     <Provider store={store}>
       <div>
         { /* Tell the Router to use our enhanced history */ }
         <ConnectedRouter history={history}>
-          <div>
-            <Error />
-            <header>
-                {/* wait for device ready here and put a splash screen*/}
-                Links:
-                {' '}
-                <Link to="/">Home</Link>
-                {' '}
-                <Link to="/jobs">Jobs</Link>
-                {' '}
-                <Link to="/login">Login</Link>
-                {' '}
-                <Link to="/settings">Settings</Link>
-                {' '}
-                <button onClick={() => store.dispatch(logout())}>Logout</button>
-            </header>
-
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/signup" component={(Signup)}/>
-              <Route path="/login" component={(Login)}/>
-              <Route path="/settings" component={(SettingsEditor)}/>
-              <Route path="/jobs" component={UserIsAuthenticated(JobList)}/>
-            </Switch>
-          </div>
+            <App/>
         </ConnectedRouter>
-        <DevTools />
+          {process.env.NODE_ENV !== 'production' ? null: (device.platform === "browser"? <DevTools /> : null)}
       </div>
     </Provider>,
     document.getElementById('mount')

@@ -40,6 +40,7 @@ class SettingsEditor extends React.Component {
         });
     }
     render(){
+        console.log("tamer")
         return (
             <form onSubmit={this.submitSettings}>
                 <label htmlFor="api_url">Api url</label><input type="text" name="api_url" value={this.state.api_url} onChange={this.updateInput} />

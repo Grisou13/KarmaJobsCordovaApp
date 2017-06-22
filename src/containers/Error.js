@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 const formatError = (error) => {
     let msg = ""
-    if(error.config.url)
+    if(error.config)
         msg+="There was an error while contacting "+error.config.url
     if(error.message)
         msg += "\n"+error.message+""

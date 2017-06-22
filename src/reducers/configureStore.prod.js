@@ -1,7 +1,6 @@
 import { createStore,combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { reducer as rUiReducer } from 'redux-ui'
-// import {routerReducer, routerMiddleware } from 'react-router-redux'
 import promiseMiddleware from 'redux-promise';
 import { browserHistory } from 'react-router'
 import userReducer from './user'
@@ -15,13 +14,17 @@ const reducers = combineReducers({
     ui: rUiReducer,
     user: userReducer,
     jobs: jobReducer,
-    tracking
+    tracking,
+    errors
 })
 const createEnhancers = (history) => compose(
-      applyMiddleware(thunk, routerMiddleware(history), jobMiddleware ),
-  );
+    // Middleware you want to use in development:
+    applyMiddleware(thunk, routerMiddleware(history), jobMiddleware ),
+    // Required! Enable Redux DevTools with the monitors you chose
+);
 
 const initialState = {}
 export default (initialState, history) => {
-  return createStore(connectRouter(history)(reducers), initialState, createEnhancers(history));
+    const store = createStore(connectRouter(history)(reducers), initialState, createEnhancers(history));
+    return store;
 }

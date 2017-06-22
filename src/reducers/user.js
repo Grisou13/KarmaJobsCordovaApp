@@ -2,7 +2,7 @@ import * as constants from '../consts/user'
 import {ApiConfig} from './../utils/api'
 const initialState = {
   data: {},
-  token: null,
+  token: false,
   isLoading: false,
   failed: false,
   error: null

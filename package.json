@@ -15,7 +15,8 @@
         "plugins": {
             "cordova-plugin-whitelist": {},
             "cordova-plugin-browsersync": {},
-            "cordova-plugin-geolocation": {}
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-device": {}
         }
     },
     "dependencies": {
@@ -31,6 +32,7 @@
         "cordova-browser": "^4.1.0",
         "cordova-plugin-browsersync": "^0.1.6",
         "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-whitelist": "1",
         "dotenv-webpack": "^1.5.0",
@@ -38,6 +40,7 @@
         "history": "^4.6.1",
         "prop-types": "^15.5.10",
         "react": "^15.5.4",
+        "react-burger-menu": "^2.1.1",
         "react-dom": "^15.5.4",
         "react-redux": "^5.0.5",
         "react-router": "^4.1.1",
@@ -49,7 +52,7 @@
         "redux-promise": "^0.5.3",
         "redux-thunk": "^2.2.0",
         "redux-ui": "^0.1.1",
-        "webpack": "^2.5.1"
+        "webpack": "^3.0.0"
     },
     "devDependencies": {
         "babel-plugin-transform-decorators": "^6.24.1",

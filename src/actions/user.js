@@ -50,3 +50,11 @@ export const getUserData = () => dispatch =>
     .getUser()
     .then(user => dispatch(loggedIn(user)))
     .catch(err => dispatch(loginFailed(err)))
+
+export const fetchUserAndRedirect = url => dispatch => {
+    Api.getInstance()
+        .getUser()
+        .then(user => dispatch(loggedIn(user)))
+        .then(dispatch(push(url)))
+        .catch(err => dispatch(loginFailed(err)))
+}

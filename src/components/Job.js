@@ -9,9 +9,6 @@ const Job = ({ title, id, geo_location, currentPosition }) => {
         longitude:geo_location.lng
     }
     let distance = haversine(loc,currentPosition)
-    console.log(loc)
-    console.log(currentPosition);
-    console.log("DISTANCE:",distance)
     let unit = "km"
     if(distance < 1){
       distance = distance*1000

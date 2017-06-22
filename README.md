@@ -17,8 +17,11 @@ npm i -g webpack cordova
 # install dependencies
 npm i
 
-# Install for android
+# Install plateforms
 cordova platform add android
+
+# Restore configs
+cordova prepare
 
 # build assets
 npm run build
