@@ -42,9 +42,9 @@ class SettingsEditor extends React.Component {
     render(){
         console.log("tamer")
         return (
-            <form onSubmit={this.submitSettings}>
-                <label htmlFor="api_url">Api url</label><input type="text" name="api_url" value={this.state.api_url} onChange={this.updateInput} />
-                <label htmlFor="token">Access token : </label><input type="text" name="token" readOnly={true} value={this.state.accessToken} onChange={this.updateInput}/>
+            <form className="settings" onSubmit={this.submitSettings}>
+                <div className="setting"><label htmlFor="api_url">Api url</label><input type="text" name="api_url" value={this.state.api_url} onChange={this.updateInput} /></div>
+                <div className="setting"><label htmlFor="token">Access token : </label><input type="text" name="token" readOnly={true} value={this.state.accessToken} onChange={this.updateInput}/></div>
                 <button type="submit">
                     <span>Save</span>
                 </button>

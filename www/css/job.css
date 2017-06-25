@@ -1,0 +1,34 @@
+.job{
+  width: 100%;
+  text-align:left;
+  display: block;
+  border-bottom: 1px solid #9E9E9E;
+}
+.job > .row{
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  /*height: 2.5rem;*/
+}
+.job > .row label{
+  flex-grow: 1;
+  flex-basis: 20%;
+}
+.job > .row input{
+  flex-grow: 2;
+  flex-basis: 80%;
+}
+.job .reward{
+  flex-basis: 50%;
+}
+.job .distance{
+  flex-basis: 50%;
+  text-align: right;
+}
+.job svg{
+  width: 14px;
+  height: 14px;
+}

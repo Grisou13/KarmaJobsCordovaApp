@@ -7,6 +7,7 @@ import userReducer from './user'
 import jobReducer from './jobs'
 import tracking from './tracking'
 import errors from './errors'
+import errorMiddleware from './../middlewares/error'
 import jobMiddleware from '../middlewares/job'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 
@@ -19,7 +20,7 @@ const reducers = combineReducers({
 })
 const createEnhancers = (history) => compose(
     // Middleware you want to use in development:
-    applyMiddleware(thunk, routerMiddleware(history), jobMiddleware ),
+    applyMiddleware(thunk, routerMiddleware(history), jobMiddleware, errorMiddleware ),
     // Required! Enable Redux DevTools with the monitors you chose
 );
 

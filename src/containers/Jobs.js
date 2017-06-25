@@ -15,7 +15,6 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps, null)
 class Jobs extends React.Component {
     render(){
-        console.log(this.props.jobs)
         return (
             <div>
                 <Map {...this.props}/>

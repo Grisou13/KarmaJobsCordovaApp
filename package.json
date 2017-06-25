@@ -9,8 +9,7 @@
     },
     "cordova": {
         "platforms": [
-            "android",
-            "browser"
+            "android"
         ],
         "plugins": {
             "cordova-plugin-whitelist": {},
@@ -29,7 +28,6 @@
         "bluebird": "^3.5.0",
         "connected-react-router": "^4.2.1",
         "cordova-android": "^6.2.3",
-        "cordova-browser": "^4.1.0",
         "cordova-plugin-browsersync": "^0.1.6",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-device": "^1.1.6",

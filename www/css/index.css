@@ -19,7 +19,10 @@
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
-
+body, html{
+    margin:0;
+    padding:0;
+}
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -41,7 +44,6 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
 }
 
@@ -57,6 +59,9 @@ body {
     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
+
+    text-transform:uppercase;
+
 }
 
 /* Landscape layout (with min-width) */
@@ -102,56 +107,24 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
 
-.bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
-}
-
-.right .bm-burger-button {
-    left: initial;
-    right: 36px;
-}
-
-.bm-burger-bars {
-    background: #373a47;
-}
-
-.bm-morph-shape {
-    fill: #373a47;
-}
-
-.bm-menu {
-    background: #373a47;
-}
-.bm-menu a {
-    color: #b8b7ad;
-}
-
-.bm-item-list a {
-    padding: 0.8em;
-}
-.bm-item-list span {
-    margin-left: 10px;
-    font-weight: 700;
-}
 main {
     height: 100%;
-    padding: 3em 2em;
+    padding-right: 1rem;
+    padding-top: 4px;
+    padding-bottom: 1rem;
+    padding-left: 3em;
     text-align: center;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }

@@ -28,7 +28,7 @@ export class ApiConfig{
         return conf.set("access_token",val)
     }
     static get url(){
-        return conf.get("url",getApiUrlFromConfig)
+        return conf.get("url",conf.set("url",getApiUrlFromConfig()))
     }
     static set url(val){
         return conf.set("url",val)

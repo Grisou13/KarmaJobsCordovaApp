@@ -58,7 +58,6 @@ if(token){
  * --------------------
  */
 function onSuccess(position) {
-  console.log(store.getState())
     store.dispatch(updatePosition(position.coords))
   }
 
@@ -70,7 +69,6 @@ const options = { timeout: 3000,enableHighAccuracy: true }
 var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 // but also populate initial position
 navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-console.log(watchID)
 
 
 /**
@@ -89,6 +87,10 @@ loadJS('https://maps.googleapis.com/maps/api/js?key='+process.env.GOOGLE_MAP_API
 
 
 const render = () => {
+  let appElem = document.getElementById("app")
+  if(appElem != null)
+    appElem.remove()
+    
   return ReactDOM.render(
     <Provider store={store}>
       <div>

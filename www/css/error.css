@@ -1,0 +1,17 @@
+.error{
+  background-color: #D50000;
+  color: white;
+  /*height: 0.7rem;*/
+  padding: 2px 4px;
+  text-align: center;
+  font-size: 0.8rem
+}
+.error p{
+  padding: 0;
+  margin: 0;
+
+}
+.error.empty {
+  height: 0;
+  transition: height 1.5s;
+}

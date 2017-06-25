@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
     pathname: state.router.location.pathname,
     search: state.router.location.search,
     hash: state.router.location.hash,
+    user: state.user.token
 })
 const mapDispatchToProps = dispatch => ({
     dispatch
@@ -18,17 +19,30 @@ const mapDispatchToProps = dispatch => ({
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Navbar extends React.Component {
+  renderAnonym(){
+    return (
+      <div>
+          <p className="path">{this.props.pathname === "" ? "home" : this.props.pathname}</p>
+          <Link to="/login">Login</Link>
+          <Link to="/settings">Settings</Link>
+      </div>
+    )
+  }
+  renderLoggedIn(){
+    return (
+      <div>
+          <p className="path">{this.props.pathname === "" ? "home" : this.props.pathname}</p>
+          <Link to="/jobs">Jobs</Link>
+          <Link to="/settings">Settings</Link>
+          <a href="#"><button onClick={() => this.props.dispatch(logout())}>Logout</button></a>
+      </div>
+    )
+  }
     render(){
-        return (
-        <div>
-            {this.props.pathname}
-            {/*<Link to="/">Home</Link>*/}
-            <Link to="/jobs">Jobs</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/settings">Settings</Link>
-            <a href="#"><button onClick={() => this.props.dispatch(logout())}>Logout</button></a>
-        </div>
-        )
+      if(this.props.user)
+        return this.renderLoggedIn()
+      else
+        return this.renderAnonym()
     }
 }
 

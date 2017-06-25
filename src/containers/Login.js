@@ -24,13 +24,15 @@ class LoginContainer extends Component {
 
     return (
 
-      <div>
-        <h2>Enter your name</h2>
-        <input type="text" ref="name" />
-        <br/>
-        <input type="text" ref="pwd" />
-
-        <br/>
+      <div className="login">
+        <div className="row">
+          <label htmlFor="name">Email</label>
+          <input type="text" name="name" ref="name" />
+        </div>
+        <div className="row">
+        <label htmlFor="pwd">Password</label>
+        <input type="password" name="pwd" ref="pwd" />
+        </div>
         <button onClick={(e) => this.onClick(e)}>Login</button>
       </div>
     )

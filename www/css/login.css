@@ -1,0 +1,38 @@
+/*.settings input, label {
+    float:left;
+    margin:5px;
+}*/
+.login input{
+  display: inline;
+  height: 2rem;
+  margin-left: 15px;
+  padding: 2px 8px;
+  border: 2px solid #FAFAFA;
+}
+
+.login button{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 10px;
+}
+.login input[readonly='readonly'],  .settings input[readonly]{
+  background-color: #9E9E9E;
+  border-color: #9E9E9E;
+}
+.login > .row{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 2px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2.5rem;
+}
+.login > .row label{
+  flex-grow: 1;
+  flex-basis: 20%;
+}
+.login > .row input{
+  flex-grow: 2;
+  flex-basis: 80%;
+}

@@ -33,23 +33,37 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="css/error.css">
+        <link rel="stylesheet" type="text/css" href="css/settings.css">
+        <link rel="stylesheet" type="text/css" href="css/job.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+
+        <title>Karmajobs Cordova</title>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 width="512px" height="512px" style="display:none" xml:space="preserve">
+        	 <symbol id="icon-marker" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" >
+          	<path d="M256,0C167.641,0,96,71.625,96,160c0,24.75,5.625,48.219,15.672,69.125C112.234,230.313,256,512,256,512l142.594-279.375
+          		C409.719,210.844,416,186.156,416,160C416,71.625,344.375,0,256,0z M256,256c-53.016,0-96-43-96-96s42.984-96,96-96
+          		c53,0,96,43,96,96S309,256,256,256z"/>
+        </symol>
+        </svg>
+
     </head>
     <body>
         <div id="app" class="app">
-            <h1>Apache Cordova</h1>
+            <h1>Karmajobs Cordova</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+                <p class="event received">Loading...</p>
             </div>
-
         </div>
-        <div id="mount">
-
-        </div>
+        <div id="mount"></div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script src="bundle.js" charset="utf-8"></script>
+        <script src="bundle.js" charset="utf-8" async></script>
     </body>
 </html>
