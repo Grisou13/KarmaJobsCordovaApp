@@ -9,6 +9,10 @@ The project uses an api available publicaly `http://karmajobs.servehttp.com/api`
 
 - Node >= 7
   - npm
+- JDK >= 1.8
+- Android platform tools
+  - adb
+  - gradle
 
 # Install
 
